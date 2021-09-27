@@ -1,31 +1,35 @@
-export const users = [
+export const hoodies = [
   {
-    name: 'Adam Romański',
-    attendance: '39%',
-    average: '2.3',
+    name: "Polar Skate co.",
+    model: "Fill Logo",
+    price: 299,
   },
   {
-    name: 'Krzysztof Batko',
-    attendance: '23%',
-    average: '3.3',
+    name: "Nike SB",
+    model: "GFX4 hoodie",
+    price: 239,
   },
   {
-    name: 'Patrycja Gonciarz',
-    attendance: '45%',
-    average: '4.3',
+    name: "Thrasher",
+    model: "Skate mag",
+    price: 550,
+  },
+];
+
+export const shirts = [
+  {
+    name: "Polar Skate co.",
+    model: "Big Logo",
+    price: 199,
   },
   {
-    name: 'Olga Hahn',
-    attendance: '56%',
-    average: '4.1',
+    name: "Thrasher",
+    model: "Skategoat",
+    price: 99,
   },
   {
-    name: 'Paweł Andrzejewski',
-    attendance: '29%',
-    average: '2.4',
-  },
-  {
-    name: 'Paweł Roman',
-    average: '2.4',
+    name: "Dime",
+    model: "Classic small logo",
+    price: 149,
   },
 ];
