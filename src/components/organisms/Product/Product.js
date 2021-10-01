@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import AddToCartSection from "components/molecules/AddToCartSection/AddToCartSection";
+import AddToCartSection from "components/organisms/AddToCartSection/AddToCartSection";
 import PhotoCarousel from "components/molecules/PhotoCarousel/PhotoCarousel";
 
 const Wrapper = styled.div`
@@ -11,7 +11,9 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.lightGrey};
-  border: 1px solid black;
+  box-shadow: -2px 4px 10px lightgrey;
+  border-radius: 20px;
+  overflow: hidden;
   margin: 20px;
   @media (min-width: 1000px) {
     width: 25%;
