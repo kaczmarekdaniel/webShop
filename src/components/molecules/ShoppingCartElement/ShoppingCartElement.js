@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { StoreContext } from "providers/StoreProvider";
 import styled from "styled-components";
 import AddToCartSection from "../../organisms/AddToCartSection/AddToCartSection";
-import ChooseSize from "components/atoms/ChooseSize/ChooseSize";
+//import CartChooseSize from "components/atoms/CartChooseSize/CartChooseSize";
 
 const Element = styled.div`
   width: 100%;
@@ -19,16 +19,15 @@ const Element = styled.div`
   box-shadow: -2px 4px 10px lightgrey;
   border-radius: 20px;
   overflow: hidden;
-
   &:last-of-type {
-    margin-bottom: 5%;
+    margin-bottom: 15%;
   }
 
   @media (min-width: 1024px) {
     width: 45%;
-    min-height: 25vh;
-    height: 30%;
-    margin: 2% 0 2% 4%;
+    height: 25vh;
+    min-height: 20vh;
+    margin: 2% 0 0% 4%;
   }
   @media (min-width: 2000px) {
     width: 45%;
@@ -46,6 +45,9 @@ const Modifications = styled.div`
   align-items: center;
   background-color: aliceblue;
   flex-direction: column;
+  p {
+    font-size: 2vh;
+  }
 `;
 
 const Size = styled.div`
@@ -65,6 +67,14 @@ const Image = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 20px;
+  overflow: hidden;
+
+  img {
+    width: auto;
+    max-width: 100%;
+    height: 100%;
+  }
 `;
 
 const ProductSpecification = styled.div`
@@ -80,10 +90,12 @@ const ProductSpecification = styled.div`
   h2 {
     font-weight: normal;
     margin: 0;
+    font-size: 2vh;
   }
   h3 {
     font-weight: normal;
     margin: 0;
+    font-size: 2vh;
   }
 `;
 const Quantity = styled.div`
@@ -93,6 +105,7 @@ const Quantity = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  font-size: 2vh;
 `;
 
 const RemoveFromCart = styled.div`
@@ -106,6 +119,7 @@ const RemoveFromCart = styled.div`
   h2 {
     font-weight: normal;
     margin: 0;
+    font-size: 2vh;
   }
 
   hr {
@@ -135,7 +149,9 @@ const ShoppingCartElement = ({ productData }) => {
   return (
     <>
       <Element>
-        <Image></Image>
+        <Image>
+          <img src={productData.photo} />
+        </Image>
         <ProductSpecification>
           <h2>{productData.name}</h2>
           <h3>{productData.model}</h3>
@@ -144,7 +160,6 @@ const ShoppingCartElement = ({ productData }) => {
         <Modifications>
           <Size>
             <p>Size:</p>
-            <ChooseSize product={productData} />
           </Size>
           <Quantity>
             <p>Quantity:{productData.quantity}</p>
@@ -154,7 +169,7 @@ const ShoppingCartElement = ({ productData }) => {
               Price: {productData.itemtotal}${productData.size}
             </h2>
             <hr />
-            <DeleteButton onClick={() => removeFromCart(productData.id)}>
+            <DeleteButton onClick={() => removeFromCart(productData.key)}>
               Remove
             </DeleteButton>
           </RemoveFromCart>

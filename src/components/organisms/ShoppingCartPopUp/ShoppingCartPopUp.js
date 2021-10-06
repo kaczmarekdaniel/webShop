@@ -3,6 +3,7 @@ import { StoreContext } from "providers/StoreProvider";
 import styled from "styled-components";
 import ShoppingCartElement from "components/molecules/ShoppingCartElement/ShoppingCartElement";
 import Product from "../Product/Product";
+import { v4 as uuidv4 } from "uuid";
 
 const PopUp = styled.div`
   width: 100%;
@@ -37,7 +38,7 @@ const PopUp = styled.div`
 
 const ItemsSection = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -106,7 +107,7 @@ const ShoppingCartPopUp = () => {
       );
     } else {
       return cart.map((productData) => (
-        <ShoppingCartElement productData={productData} key={productData.id} />
+        <ShoppingCartElement productData={productData} />
       ));
     }
   };

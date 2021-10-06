@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { StoreContext } from "providers/StoreProvider";
 import ChooseSize from "components/atoms/ChooseSize/ChooseSize";
+import { v4 as uuidv4 } from "uuid";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -20,12 +21,6 @@ const Wrapper = styled.div`
     background-color: black;
     border: none;
   }
-
-  @media (max-width: 1024px) {
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
 `;
 
 const ProductName = styled.div`
@@ -38,16 +33,16 @@ const ProductName = styled.div`
   color: whitesmoke;
   flex-wrap: no-wrap;
 
-  @media (min-width: 2000px) {
-    height: 100%;
-  }
+  padding: 1% 0% 0% 5%;
   h2 {
     font-weight: normal;
-    margin: 10px 0px 0px 30px;
+    font-size: 1.5rem;
+    margin: 0px;
   }
   h3 {
     font-weight: normal;
-    margin: 0px 0px 0px 30px;
+    font-size: 0.8rem;
+    margin: 2px 0px 0px 0px;
   }
 `;
 
@@ -60,9 +55,6 @@ const PriceAndButton = styled.div`
   align-items: center;
   font-weight: normal;
   padding: 0px;
-  @media (min-width: 2000px) {
-    height: 60%;
-  }
 
   hr {
     margin: 5px;
@@ -74,6 +66,7 @@ const PriceAndButton = styled.div`
   h1 {
     font-weight: normal;
     margin: 0px;
+    font-size: 1.5rem;
     color: white;
   }
   p {
@@ -82,38 +75,28 @@ const PriceAndButton = styled.div`
     color: white;
     margin-top: auto;
   }
+
+  @media (min-width: 2000px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+  }
 `;
 const Element = styled.div`
   height: 40%;
-  width: 40%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-weight: normal;
-
-  @media (min-width: 2000px) {
-  }
-
-  hr {
-    margin: 0px;
-    width: 50%;
-    height: 1px;
-    background-color: black;
-    border: none;
-  }
-
-  p {
-    font-weight: normal;
-    margin: 0px;
-    color: white;
-    margin-top: 5px;
-  }
+  padding: 0 5% 0 5%;
 `;
 
 const AddToCart = styled.button`
-  width: 90%;
-  height: 80%;
+  margin-top: 5%;
+  width: 75%;
+  height: 25%;
   border: none;
   border-radius: 20px;
   font-size: ${({ theme }) => theme.fontSize.s};
@@ -136,75 +119,66 @@ const AddToCart = styled.button`
   &:focus {
     outline: none;
   }
-
-  @media (min-width: 1024px (max-width: 1999px)) {
-    min-width: 100px;
-    min-height: 40px;
-    width: 50%;
-    height: 40%;
-    margin: 10px 0px 10px 0px;
-  }
-
-  @media (min-width: 2000px) {
-    min-width: 100px;
-    min-height: 40px;
-    width: 50%;
-    height: 35%;
-    margin: 5px 10px 10px 10px;
-  }
 `;
 
 const AddToCartSection = ({ product }) => {
-  const { handleAddToCart, cart, addToCart } = useContext(StoreContext);
-  const { cleanButton, setCleanButtons } = useContext(StoreContext);
-  const [size, setSize] = React.useState("xd");
+  const { handleAddToCart, setPopUp, popUp } = useContext(StoreContext);
   const [focus, setFocus] = React.useState("");
+  const [size, setSize] = React.useState("");
 
-  const changeSize = (val) => {
-    console.log(product.size);
-
-    console.log("-----");
+  const showPopUp = (type) => {
+    setPopUp({ show: true, type: type });
   };
 
   const takeSize = (val) => {
-    if (!cart.includes(product)) {
-      setSize(val);
-    } else {
-      changeSize(val);
-    }
+    setSize(val);
   };
+
   const cleanButtons = () => {
     for (let i = 1; i < 5; i++) {
       document.getElementById(i + product.id + "").className = "active";
     }
   };
 
+  const sizeChecked = () => {
+    //alert(size)
+    if (size != "") {
+      handleAddToCart(product, size, uuidv4());
+      showPopUp("passed");
+      //alert(size);
+    } else {
+      showPopUp("error");
+    }
+  };
+
   return (
-    <Wrapper>
-      <ProductName>
-        <h2>{product.name}</h2>
-        <h3>{product.model}</h3>
-      </ProductName>
-      <Element>
-        <ChooseSize
-          product={product}
-          takeSize={takeSize}
-          focus={focus}
-          setFocus={setFocus}
-        />
-        <hr />
-      </Element>
-      <PriceAndButton>
-        <h1>${product.price}</h1>
-        <AddToCart
-          onClick={() => {
-            handleAddToCart(product, size), cleanButtons();
-          }}
-        >
-          Add To Cart
-        </AddToCart>
-      </PriceAndButton>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <ProductName>
+          <h2>{product.name}</h2>
+          <h3>{product.model}</h3>
+        </ProductName>
+        <Element>
+          <ChooseSize
+            product={product}
+            takeSize={takeSize}
+            focus={focus}
+            setFocus={setFocus}
+          />
+        </Element>
+        <PriceAndButton>
+          <h1>${product.price}</h1>
+          <AddToCart
+            size={size}
+            onClick={() => {
+              sizeChecked(), cleanButtons(), setFocus(""), setSize("");
+            }}
+          >
+            Add To Cart
+          </AddToCart>
+        </PriceAndButton>
+      </Wrapper>
+    </>
   );
 };
 

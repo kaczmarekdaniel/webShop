@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 
 const Product = ({ product }) => (
   <Wrapper>
-    <PhotoCarousel />
+    <PhotoCarousel photo={product.photo} />
     <AddToCartSection product={product}> </AddToCartSection>
   </Wrapper>
 );

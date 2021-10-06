@@ -60,12 +60,11 @@ const Button = styled.button`
   }
 `;
 
-const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
+const CartChooseSize = ({ takeSize, product, focus, setFocus }) => {
   const { cleanButton, setCleanButtons } = useContext(StoreContext);
 
   const takeActiveButton = (val) => {
     //alert(typeof(val.target.id))
-    //alert(val.target.value)
     console.log(val);
     if (focus == "") {
       setFocus(val.target.id);
@@ -80,24 +79,18 @@ const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
   };
 
   const setActiveButton = () => {
-    //alert(focus.value)
+    //alert(focus)
     //document.getElementById(focus).className="clickedButton" ;
   };
 
-  const giveSize = (e) => {
-    //alert(e.target.value)
-    return takeSize(e.target.value);
-  };
-
-  let size = "";
+  let size = "xd";
   return (
     <Wrapper>
       <Button
         id={"1" + product.id}
         className="active"
-        value="S"
         onClick={() => {
-          (size = "S"), giveSize(event), takeActiveButton(event);
+          (size = "S"), takeSize(size), takeActiveButton(event);
         }}
       >
         S
@@ -105,9 +98,8 @@ const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
       <Button
         id={"2" + product.id}
         className="active"
-        value="M"
         onClick={() => {
-          (size = "M"), giveSize(event), takeActiveButton(event);
+          (size = "M"), takeSize(size), takeActiveButton(event);
         }}
       >
         M
@@ -115,9 +107,8 @@ const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
       <Button
         id={"3" + product.id}
         className="active"
-        value="L"
         onClick={() => {
-          (size = "L"), giveSize(event), takeActiveButton(event);
+          (size = "L"), takeSize(size), takeActiveButton(event);
         }}
       >
         L
@@ -125,9 +116,8 @@ const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
       <Button
         id={"4" + product.id}
         className="active"
-        value="XL"
         onClick={() => {
-          (size = "XL"), giveSize(event), takeActiveButton(event);
+          (size = "XL"), takeSize(size), takeActiveButton(event);
         }}
       >
         XL
@@ -136,4 +126,4 @@ const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
   );
 };
 
-export default ChooseSize;
+export default CartChooseSize;

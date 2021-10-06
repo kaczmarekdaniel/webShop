@@ -4,6 +4,8 @@ import styled from "styled-components";
 import ShoppingCartElement from "components/molecules/ShoppingCartElement/ShoppingCartElement";
 import ShoppingCartPopUp from "components/organisms/ShoppingCartPopUp/ShoppingCartPopUp";
 import PopUpWindow from "components/molecules/PopUpWindow/PopUpWindow";
+import { v4 as uuidv4 } from "uuid";
+
 const CartButton = styled.button`
   width: 50px;
   height: 30px;
@@ -17,18 +19,18 @@ const CartButton = styled.button`
 const ShoppingCart = () => {
   const { isShow, setIsShow } = useContext(StoreContext);
   const { popUp, setPopUp, showPopUp } = useContext(StoreContext);
-
+  console.log([popUp.show]);
   return (
     <>
-      {popUp === true ? (
+      {popUp.show === true ? (
         [
           useEffect(() => {
             const timer = setTimeout(() => {
-              setPopUp(!popUp);
+              setPopUp(!popUp.show);
             }, 1000);
             return () => clearTimeout(timer);
           }, []),
-          <PopUpWindow />,
+          <PopUpWindow type={popUp.type} />,
         ]
       ) : (
         <></>
@@ -37,7 +39,7 @@ const ShoppingCart = () => {
 
       {isShow ? (
         [
-          <ShoppingCartPopUp />,
+          <ShoppingCartPopUp key={uuidv4()} />,
           <CartButton onClick={() => setIsShow(!isShow)}>Close</CartButton>,
         ]
       ) : (
