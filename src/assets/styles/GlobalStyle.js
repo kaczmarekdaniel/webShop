@@ -1,9 +1,10 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
     background-color: ${({ theme }) => theme.colors.lightGrey};
+    font-size: calc(0.5rem * 1vw);
   }
   
   *, *::after, *::before {

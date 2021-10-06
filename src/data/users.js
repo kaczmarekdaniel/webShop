@@ -1,3 +1,5 @@
+import nike from "./photos/nikeSBGFX4hoodie.jpg";
+
 export const hoodies = [
   {
     id: "h01",
@@ -10,6 +12,7 @@ export const hoodies = [
     name: "Nike SB",
     model: "GFX4 hoodie",
     price: 239,
+    photo: nike,
   },
   {
     id: "h03",

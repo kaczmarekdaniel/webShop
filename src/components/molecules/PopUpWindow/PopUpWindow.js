@@ -7,7 +7,7 @@ const PopUp = styled.div`
   height: auto;
   margin: 50vh 25% auto 25%;
   background-color: whitesmoke;
-  color: #71bc78;
+  color: black;
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -20,6 +20,7 @@ const PopUp = styled.div`
   img {
     width: 50px;
     height: 50px;
+    margin: 0 20px 0 0px;
   }
 
   @media (min-width: 1024px) {
@@ -35,15 +36,23 @@ const PopUp = styled.div`
   }
 `;
 
-const PopUpWindow = () => {
+const PopUpWindow = ({ type }) => {
   const { popUp, setPopUp } = useContext(StoreContext);
-
+  //alert(popUp.type)
   return (
     <>
-      <PopUp>
-        <img src="https://img.icons8.com/plasticine/100/000000/checked--v1.png" />
-        <p>Item added to cart</p>
-      </PopUp>
+      {popUp.type == "passed" ? (
+        <PopUp>
+          <img src="https://img.icons8.com/plasticine/100/000000/checked--v1.png" />
+          <p>Item added to cart</p>
+        </PopUp>
+      ) : (
+        //alert(popUp.type)
+        <PopUp>
+          <img src="https://img.icons8.com/plasticine/100/000000/cancel.png" />
+          <p>Cart Is Empty !</p>
+        </PopUp>
+      )}
     </>
   );
 };
