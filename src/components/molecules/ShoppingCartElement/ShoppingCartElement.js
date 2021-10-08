@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { StoreContext } from "providers/StoreProvider";
 import styled from "styled-components";
 import AddToCartSection from "../../organisms/AddToCartSection/AddToCartSection";
-//import CartChooseSize from "components/atoms/CartChooseSize/CartChooseSize";
+import CartChooseSize from "components/atoms/CartChooseSize/CartChooseSize";
+import Quantity from "components/atoms/Quantity/Quantity";
 
 const Element = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ const Element = styled.div`
   overflow: hidden;
   &:last-of-type {
     margin-bottom: 15%;
+    font-size: 1.2vh;
   }
 
   @media (min-width: 1024px) {
@@ -35,6 +37,9 @@ const Element = styled.div`
     height: 30%;
     margin: 2% 0 2% 4%;
   }
+  p {
+    margin: 0 0 0 0;
+  }
 `;
 
 const Modifications = styled.div`
@@ -45,9 +50,6 @@ const Modifications = styled.div`
   align-items: center;
   background-color: aliceblue;
   flex-direction: column;
-  p {
-    font-size: 2vh;
-  }
 `;
 
 const Size = styled.div`
@@ -58,7 +60,7 @@ const Size = styled.div`
   align-items: center;
   flex-direction: column;
   p {
-    margin: 10px 0 0 0;
+    margin: 5px 0 0 0;
   }
 `;
 const Image = styled.div`
@@ -98,15 +100,6 @@ const ProductSpecification = styled.div`
     font-size: 2vh;
   }
 `;
-const Quantity = styled.div`
-  width: 100%;
-  height: 33%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  font-size: 2vh;
-`;
 
 const RemoveFromCart = styled.div`
   width: 100%;
@@ -145,7 +138,9 @@ const CartIsEmpty = styled.div`
 `;
 
 const ShoppingCartElement = ({ productData }) => {
-  const { removeFromCart } = useContext(StoreContext);
+  const { removeFromCart, buttonsToDisable, setButtonsToDisable } =
+    useContext(StoreContext);
+
   return (
     <>
       <Element>
@@ -160,14 +155,17 @@ const ShoppingCartElement = ({ productData }) => {
         <Modifications>
           <Size>
             <p>Size:</p>
+            <CartChooseSize
+              product={productData}
+              highlight={productData.size}
+              key={productData.key}
+            />
           </Size>
-          <Quantity>
-            <p>Quantity:{productData.quantity}</p>
-          </Quantity>
+          <p>Quantity</p>
+
+          <Quantity quantity={productData.quantity} product={productData} />
+
           <RemoveFromCart>
-            <h2>
-              Price: {productData.itemtotal}${productData.size}
-            </h2>
             <hr />
             <DeleteButton onClick={() => removeFromCart(productData.key)}>
               Remove

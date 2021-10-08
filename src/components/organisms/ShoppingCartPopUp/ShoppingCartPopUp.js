@@ -63,7 +63,7 @@ const Header = styled.div`
   }
 `;
 
-const BtnContainer = styled.div`
+export const BtnContainer = styled.div`
   width: 100%;
   height: 7%;
   background-color: #ffd1dc;

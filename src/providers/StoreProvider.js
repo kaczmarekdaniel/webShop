@@ -19,6 +19,8 @@ export const StoreContext = React.createContext({
   addToSizes: () => {},
   addToCart: () => {},
   hoodies: [],
+  setButtonsToDisable: () => {},
+  buttonsToDisable: [],
   shirts: [],
   cleanButtons: false,
   setCleanButtons: () => {},
@@ -32,6 +34,7 @@ const StoreProvider = ({ children }) => {
   const [sizes, addToSizes] = React.useState([]);
   const [cleanButtons, setCleanButtons] = React.useState(false);
   const [popUpResponse, setPopUpResponse] = React.useState("");
+  const [buttonsToDisable, setButtonsToDisable] = React.useState([]);
 
   const handleAddToCart = (product, givenSize, key) => {
     if (!cart.find((item) => item.id == product.id)) {
