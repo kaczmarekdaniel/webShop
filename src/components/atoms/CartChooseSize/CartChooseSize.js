@@ -1,6 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { StoreContext } from "providers/StoreProvider";
+import { v4 as uuidv4 } from "uuid";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,9 +17,11 @@ const Wrapper = styled.div`
     border: none;
     border-radius: 10px;
     background-color: ${({ theme }) => theme.colors.lightGrey};
+    box-shadow: -2px 4px 10px ${({ theme }) => theme.colors.darkGrey};
     background-size: 300% 100%;
     transition: all 0.3s ease-out;
     background-size: 300% 100%;
+
     background-image: linear-gradient(
       to right,
       ${({ theme }) => theme.colors.lightGrey},
@@ -34,12 +37,28 @@ const Wrapper = styled.div`
     width: 25%;
     height: 65%;
     min-height: 30px;
+    box-shadow: -2px 4px 10px ${({ theme }) => theme.colors.darkGrey};
+
     margin: 2%;
     border: none;
     border-radius: 10px;
     background-size: 300% 100%;
     background-image: none;
     background-color: #ffd1dc;
+  }
+
+  .disabledButton {
+    width: 25%;
+    height: 65%;
+    min-height: 30px;
+    box-shadow: -2px 4px 10px ${({ theme }) => theme.colors.darkGrey};
+
+    margin: 2%;
+    border: none;
+    border-radius: 10px;
+    background-size: 300% 100%;
+    background-image: none;
+    background-color: ${({ theme }) => theme.colors.darkGrey};
   }
 `;
 
@@ -60,65 +79,81 @@ const Button = styled.button`
   }
 `;
 
-const CartChooseSize = ({ takeSize, product, focus, setFocus }) => {
-  const { cleanButton, setCleanButtons } = useContext(StoreContext);
+const CartChooseSize = ({ takeSize, product, highlight }) => {
+  const { cart, addToCart, buttonsToDisable, setButtonsToDisable } =
+    useContext(StoreContext);
+  const [targetId, setTargetId] = useState(
+    product.size + product.id + "" + product.key
+  );
+  const [localSize, setLocalSize] = useState(product.size);
 
-  const takeActiveButton = (val) => {
-    //alert(typeof(val.target.id))
-    console.log(val);
-    if (focus == "") {
-      setFocus(val.target.id);
-      document.getElementById(val.target.id).className = "clickedButton";
-    } else if (focus == false) {
-      alert("xd");
-    } else {
-      document.getElementById(focus).className = "active";
-      setFocus(val.target.id);
-      document.getElementById(val.target.id).className = "clickedButton";
+  useEffect(() => {
+    if (targetId != "") {
+      document.getElementById(targetId).className = "clickedButton";
+      product.size = localSize;
+      //alert(product.size);
+      //document.getElementById("S" + product.id + product.key).disabled = true;
     }
-  };
+  });
 
+  const deactivateButton = () => {
+    document.getElementById(targetId).className = "active";
+  };
   const setActiveButton = () => {
     //alert(focus)
     //document.getElementById(focus).className="clickedButton" ;
   };
 
-  let size = "xd";
   return (
     <Wrapper>
       <Button
-        id={"1" + product.id}
+        id={"S" + product.id + product.key}
         className="active"
         onClick={() => {
-          (size = "S"), takeSize(size), takeActiveButton(event);
+          deactivateButton();
+          setLocalSize("S");
+          setTargetId("S" + product.id + product.key);
         }}
+        key={uuidv4()}
       >
         S
       </Button>
       <Button
-        id={"2" + product.id}
+        id={"M" + product.id + product.key}
         className="active"
         onClick={() => {
-          (size = "M"), takeSize(size), takeActiveButton(event);
+          deactivateButton();
+          setLocalSize("M");
+
+          setTargetId("M" + product.id + product.key);
         }}
+        key={uuidv4()}
       >
         M
       </Button>
       <Button
-        id={"3" + product.id}
+        id={"L" + product.id + product.key}
         className="active"
         onClick={() => {
-          (size = "L"), takeSize(size), takeActiveButton(event);
+          deactivateButton();
+          setLocalSize("L");
+
+          setTargetId("L" + product.id + product.key);
         }}
+        key={uuidv4()}
       >
         L
       </Button>
       <Button
-        id={"4" + product.id}
+        id={"XL" + product.id + product.key}
         className="active"
         onClick={() => {
-          (size = "XL"), takeSize(size), takeActiveButton(event);
+          deactivateButton();
+          setLocalSize("XL");
+
+          setTargetId("XL" + product.id + product.key);
         }}
+        key={uuidv4()}
       >
         XL
       </Button>
