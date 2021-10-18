@@ -94,7 +94,7 @@ const CartChooseSize = ({ takeSize, product, highlight }) => {
       //alert(product.size);
       //document.getElementById("S" + product.id + product.key).disabled = true;
     }
-  });
+  }, [targetId]);
 
   const deactivateButton = () => {
     document.getElementById(targetId).className = "active";

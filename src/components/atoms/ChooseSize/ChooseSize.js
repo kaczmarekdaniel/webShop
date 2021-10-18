@@ -66,7 +66,7 @@ const ChooseSize = ({ takeSize, product, focus, setFocus }) => {
   const takeActiveButton = (val) => {
     //alert(typeof(val.target.id))
     //alert(val.target.value)
-    console.log(val);
+    //console.log(val);
     if (focus == "") {
       setFocus(val.target.id);
       document.getElementById(val.target.id).className = "clickedButton";

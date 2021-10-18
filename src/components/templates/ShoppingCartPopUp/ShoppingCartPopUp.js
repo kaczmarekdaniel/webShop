@@ -1,8 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { StoreContext } from "providers/StoreProvider";
 import styled from "styled-components";
-import ShoppingCartElement from "components/molecules/ShoppingCartElement/ShoppingCartElement";
-import Product from "../Product/Product";
+import ShoppingCartElement from "components/organisms/ShoppingCartElement/ShoppingCartElement";
+import GlobalSubTotal from "components/atoms/SubTotal/SubTotal";
 import { v4 as uuidv4 } from "uuid";
 
 const PopUp = styled.div`
@@ -74,6 +74,7 @@ export const BtnContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-top: 1px solid black;
+  transition: all 1s ease-in-out;
   h1 {
     background-color: #ffd1dc;
   }
@@ -95,20 +96,19 @@ const CartIsEmptyMessage = styled.div`
 
 const ShoppingCartPopUp = () => {
   const { cart } = useContext(StoreContext);
-  let sum = 0;
-  const prices = cart.map((item) => (sum += item.price * item.quantity));
+  const subTotal = React.useRef(0);
 
   const CheckIsEmpty = () => {
-    if (sum == 0) {
+    if (Object.keys(cart).length != 0) {
+      return cart.map((productData) => (
+        <ShoppingCartElement productData={productData} />
+      ));
+    } else {
       return (
         <CartIsEmptyMessage>
           <h1>Your cart is empty, add something</h1>
         </CartIsEmptyMessage>
       );
-    } else {
-      return cart.map((productData) => (
-        <ShoppingCartElement productData={productData} />
-      ));
     }
   };
 
@@ -119,12 +119,10 @@ const ShoppingCartPopUp = () => {
           <h1>Your cart</h1>
         </Header>
         <ItemsSection>
-          <CheckIsEmpty />
+          <CheckIsEmpty key={uuidv4()} />
         </ItemsSection>
 
-        <BtnContainer>
-          <h1>SubTotal: {sum}$</h1>
-        </BtnContainer>
+        <BtnContainer>{<GlobalSubTotal />}</BtnContainer>
       </PopUp>
     </>
   );
