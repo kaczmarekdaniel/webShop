@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/webShop/static/css/main.05c95b9f.chunk.css",
+    "main.js": "/webShop/static/js/main.5827a9e6.chunk.js",
+    "main.js.map": "/webShop/static/js/main.5827a9e6.chunk.js.map",
+    "runtime-main.js": "/webShop/static/js/runtime-main.e404c763.js",
+    "runtime-main.js.map": "/webShop/static/js/runtime-main.e404c763.js.map",
+    "static/js/2.7af7093f.chunk.js": "/webShop/static/js/2.7af7093f.chunk.js",
+    "static/js/2.7af7093f.chunk.js.map": "/webShop/static/js/2.7af7093f.chunk.js.map",
+    "index.html": "/webShop/index.html",
+    "static/css/main.05c95b9f.chunk.css.map": "/webShop/static/css/main.05c95b9f.chunk.css.map",
+    "static/js/2.7af7093f.chunk.js.LICENSE.txt": "/webShop/static/js/2.7af7093f.chunk.js.LICENSE.txt",
+    "static/media/nikeSBGFX4hoodie.751b6c31.jpg": "/webShop/static/media/nikeSBGFX4hoodie.751b6c31.jpg",
+    "static/media/skateboard.be15ae41.png": "/webShop/static/media/skateboard.be15ae41.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e404c763.js",
+    "static/js/2.7af7093f.chunk.js",
+    "static/css/main.05c95b9f.chunk.css",
+    "static/js/main.5827a9e6.chunk.js"
+  ]
+}
