@@ -86,30 +86,30 @@ const PlusButton = styled.button`
 `;
 
 const Quantity = ({ product, quantity }) => {
-  console.log("lolz");
+  const { subTotal, setSubTotal, cart, addToCart, forceUpdate } =
+    useContext(StoreContext);
   const [localQuantity, setLocalQuantity] = React.useState(quantity);
-  const { cart } = useContext(StoreContext);
+
   product.itemtotal = localQuantity * product.price;
 
-  useEffect(() => {
-    if (localQuantity > 0) {
-      product.quantity = localQuantity;
-    } else if (localQuantity < 1) {
-      setLocalQuantity(1);
-    }
-  });
+  const increment = () => {
+    product.quantity = product.quantity + 1;
+    addToCart([...cart]);
+  };
 
+  const decrement = () => {
+    product.quantity = product.quantity - 1;
+    addToCart([...cart]);
+  };
+
+  //let index = cart[cart.indexOf(product)].quantity;
+
+  //cart[cart.indexOf(product)].quantity = localQuantity
   return (
     <Wrapper>
-      <MinusButton onClick={() => setLocalQuantity(localQuantity - 1)}>
-        {" "}
-        -{" "}
-      </MinusButton>
-      <Number> {localQuantity} </Number>
-      <PlusButton onClick={() => setLocalQuantity(localQuantity + 1)}>
-        {" "}
-        +{" "}
-      </PlusButton>
+      <MinusButton onClick={() => decrement()}> - </MinusButton>
+      <Number>{product.quantity}</Number>
+      <PlusButton onClick={() => increment()}> + </PlusButton>
       <h2>Price: {product.itemtotal}$</h2>
     </Wrapper>
   );

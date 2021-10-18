@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { StoreContext } from "providers/StoreProvider";
 import styled from "styled-components";
-import AddToCartSection from "../../organisms/AddToCartSection/AddToCartSection";
+import AddToCartSection from "../AddToCartSection/AddToCartSection";
 import CartChooseSize from "components/atoms/CartChooseSize/CartChooseSize";
-import Quantity from "components/atoms/Quantity/Quantity";
+import Quantity from "components/molecules/Quantity/Quantity";
 
 const Element = styled.div`
   width: 100%;

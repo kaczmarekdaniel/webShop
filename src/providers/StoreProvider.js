@@ -9,9 +9,7 @@ export const StoreContext = React.createContext({
   cart: [],
   sizes: [],
   subTotal: 0,
-  popUpResponse: 0,
   setPopUp: () => {},
-  setPopUpResponse: () => {},
   handleAddToCart: () => {},
   setIsShow: () => {},
   removeFromCart: () => {},
@@ -19,8 +17,9 @@ export const StoreContext = React.createContext({
   addToSizes: () => {},
   addToCart: () => {},
   hoodies: [],
-  setButtonsToDisable: () => {},
-  buttonsToDisable: [],
+  update: [],
+  forceUpdate: () => {},
+
   shirts: [],
   cleanButtons: false,
   setCleanButtons: () => {},
@@ -33,8 +32,7 @@ const StoreProvider = ({ children }) => {
   const [subTotal, setSubTotal] = React.useState(0);
   const [sizes, addToSizes] = React.useState([]);
   const [cleanButtons, setCleanButtons] = React.useState(false);
-  const [popUpResponse, setPopUpResponse] = React.useState("");
-  const [buttonsToDisable, setButtonsToDisable] = React.useState([]);
+  const [update, forceUpdate] = React.useState([]);
 
   const handleAddToCart = (product, givenSize, key) => {
     if (!cart.find((item) => item.id == product.id)) {
@@ -64,12 +62,8 @@ const StoreProvider = ({ children }) => {
 
         addToCart([...cart, newProduct]);
       }
-      console.log(cart);
+      //console.log(cart);
     }
-  };
-
-  const hidePopUp = () => {
-    setTimeout(setPopUp(false), 1000);
   };
 
   const removeFromCart = (productData) => {
@@ -89,7 +83,8 @@ const StoreProvider = ({ children }) => {
         removeFromCart,
         subTotal,
         handleAddToCart,
-
+        update,
+        forceUpdate,
         setSubTotal,
         addToCart,
         addToSizes,

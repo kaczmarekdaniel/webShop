@@ -4,13 +4,15 @@ import { GlobalStyle } from "assets/styles/GlobalStyle";
 import { theme } from "assets/styles/theme";
 import { Wrapper } from "./Root.styles";
 import MainTemplate from "components/templates/MainTemplate";
-import Hoodies from "components/organisms/Products/Hoodies";
-import Shirts from "components/organisms/Products/Shirts";
+import Hoodies from "components/templates/Products/Hoodies";
+import Shirts from "components/templates/Products/Shirts";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./scrollbar.css";
 import StoreProvider from "providers/StoreProvider";
 import { StoreContext } from "providers/StoreProvider";
 import ShoppingCart from "views/ShoppingCart";
+import ContactView from "components/templates/ContactView/ContactView";
+import MainPage from "components/templates/MainPage/MainPage";
 
 const Root = () => {
   return (
@@ -25,8 +27,14 @@ const Root = () => {
                 <Route path="/shirts">
                   <Shirts />
                 </Route>
-                <Route path="/">
+                <Route path="/contact">
+                  <ContactView />
+                </Route>
+                <Route path="/hoodies">
                   <Hoodies />
+                </Route>
+                <Route path="/">
+                  <MainPage />
                 </Route>
               </Switch>
             </Wrapper>

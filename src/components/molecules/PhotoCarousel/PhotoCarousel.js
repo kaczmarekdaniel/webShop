@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 
 const PhotoCarousel = ({ photo }) => {
   //alert(photo);
-  console.log(photo);
+  //console.log(photo);
   return (
     <>
       <Wrapper>
